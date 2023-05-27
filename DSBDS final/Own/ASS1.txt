@@ -1,0 +1,137 @@
+"""Data Wrangling, I
+Perform the following operations using Python on any open source dataset (e.g., data.csv)
+1. Import all the required Python Libraries.
+2. Locate an open source data from the web (e.g., https://www.kaggle.com). Provide a clear 
+ description of the data and its source (i.e., URL of the web site).
+3. Load the Dataset into pandas dataframe.
+4. Data Preprocessing: check for missing values in the data using pandas isnull(), describe() 
+function to get some initial statistics. Provide variable descriptions. Types of variables etc. 
+Check the dimensions of the data frame.
+5. Data Formatting and Data Normalization: Summarize the types of variables by checking 
+the data types (i.e., character, numeric, integer, factor, and logical) of the variables in the 
+data set. If variables are not in the correct data type, apply proper type conversions.
+6. Turn categorical variables into quantitative variables in Python"""
+
+
+1. import numpy as np        // playing with multidimensional arrays
+import pandas as pd          // pandas library used for  working with datasets
+
+from google.colab import files
+uploaded = files.upload()
+
+df =pd.read_csv("iris.csv")                  //dataframe is nothing but structure which represents data in row column format
+
+df
+
+df.head()
+df.tail()
+df.info()
+
+df.columns
+
+df.index
+
+df.shape
+
+df.dtypes
+
+df.shape
+
+df.columns.values
+
+df.columns.values.tolist()
+
+df.describe(include='all')
+
+df['sepal_length']
+
+df['sepal_width']
+
+df.to_numpy()
+
+df.T
+
+df.sort_index(axis=1, ascending=False)//sort by decending order
+
+df.sort_values(by="sepal_length")
+
+df.isnull()
+
+df.notnull()
+
+df.isnull().values.any()
+
+df.notnull().sum()
+
+df.isnull().sum().sum()
+
+df.iloc[5]
+
+df["sepal_length"]
+
+df[0:3]
+
+df.loc[:, ["sepal_length", "sepal_width"]]
+
+df.iloc[:100, :]
+
+df.iloc[3]
+
+df.iloc[:, :3]
+
+df.iloc[:100, :15]
+
+df.iloc[3:5, 0:2]
+
+df.iloc[[1, 2, 4], [0, 2]]
+
+df.iloc[1:3, :]
+
+df.iloc[:, 1:3] 
+
+df.iloc[1, 1] 
+
+df['sepal_length'].iloc[5]
+
+df[['sepal_length','petal_length']]
+
+cols_2_4=df.columns[2:4]
+
+df[cols_2_4]
+
+df.iloc[5:10]
+
+cols_2_4=df.columns[2:4]               
+
+cols_2_4=df[cols_2_4]
+
+cols_2_4.iloc[5:10]  
+
+df[df.columns[2:4]].iloc[5:10]
+
+df.describe(percentiles=None, include=None, exclude=None)  
+
+df
+
+df.isnull()
+
+df.notnull(
+df.fillna(0)
+
+df.median()
+
+df.mode(axis=0)
+df["sepal_length"]=5/df["sepal_length"]
+
+df.rename(columns={"sepal_length":"NewSepalLengthCm"},inplace=True)
+
+df
+df["sepal_width"]=df["sepal_width"].astype("int")
+
+df
+
+
+
+
+
+

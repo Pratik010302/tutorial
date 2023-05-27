@@ -1,0 +1,64 @@
+Data Visualization III
+Download the Iris flower dataset or any other dataset into a DataFrame. (e.g.,
+https://archive.ics.uci.edu/ml/datasets/Iris ). Scan the dataset and give the inference as:
+1. List down the features and their types (e.g., numeric, nominal) available in the dataset.
+2. Create a histogram for each feature in the dataset to illustrate the feature distributions. 
+3. Create a boxplot for each feature in the dataset. 
+4. Compare distributions and identify outliers
+
+
+
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+from google.colab import files
+uploaded = files.upload()
+
+df =pd.read_csv('iris.csv')
+df.head()
+
+
+# Displaying different features of dataset and their types
+df.info()
+
+
+# Plotting Histogram for each feature in the dataset
+fig, axes = plt.subplots(2, 2, figsize=(16, 8))
+
+
+axes[0,0].set_title("Distribution of Sepal Length")
+axes[0,0].hist(df["sepal_length"]);
+
+axes[0,1].set_title("Distribution of Sepal Width")
+axes[0,1].hist(df["sepal_width"]);
+
+axes[1,0].set_title("Distribution of Petal Length")
+axes[1,0].hist(df["petal_length"]);
+
+axes[1,1].set_title("Distribution of Petal Width")
+axes[1,1].hist(df["petal_width"]);
+
+
+
+# plotting the boxplot for each feature in the datasetfig, axes = plt.subplots(2, 2, figsize=(16,9))
+fig, axes = plt.subplots(2, 2, figsize=(16,9))
+
+axes[0,0].set_title("Distribution of Sepal Length")
+sns.boxplot(  y="sepal_length", x= "species", data=df,  orient='v' , ax=axes[0, 0])
+
+axes[0,1].set_title("Distribution of Sepal Length")
+sns.boxplot(  y="sepal_width", x= "species", data=df,  orient='v' , ax=axes[0, 1])
+
+axes[1,0].set_title("Distribution of Sepal Length")
+sns.boxplot(  y="petal_length", x= "species", data=df,  orient='v' , ax=axes[1, 0])
+
+axes[1,1].set_title("Distribution of Sepal Length")
+sns.boxplot(  y="petal_width", x= "species", data=df,  orient='v' , ax=axes[1, 1])
+
+plt.show()
+
+
+

@@ -1,0 +1,86 @@
+Data Analytics I
+Create a Linear Regression Model using Python/R to predict home prices using Boston Housing 
+Dataset (https://www.kaggle.com/c/boston-housing). The Boston Housing dataset contains 
+information about various houses in Boston through different parameters. There are 506 samples 
+and 14 feature variables in this dataset. 
+
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+df = pd.read_csv("/content/housing.csv")
+
+df.head()
+df.tail()
+
+df.isnull().sum()
+
+
+#here we separate first 13 columns as x and last column as Y predicted
+
+X = df[['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX',
+       'PTRATIO', 'B', 'LSTAT']]
+Y = df['MEDV']
+
+
+#Define dependent and independent varibales from the dataset
+
+X = df.iloc[:,0:13]
+y = df.iloc[:,-1]
+
+
+#splitting data into training and testing data 
+#Spliting data for training and testing
+#Here, 20% data used for testing and 80% data used for training
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X,Y, test_size = 0.2, random_state = 42)
+
+
+#shapes of training and testing datasets
+print(X_train.shape)
+print(X_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+
+
+#standarizing the data
+
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+X_train = sc.fit_transform(X_train)
+X_test = sc.fit_transform(X_test)
+
+
+#importing and loading linear regression model
+
+from sklearn.linear_model import LinearRegression
+lr = LinearRegression()
+lr.fit(X_train, y_train)
+y_pred = lr.predict(X_test)
+
+
+#printing the predicted values
+
+print(y_pred)
+
+#Root mean squared error
+
+from sklearn.metrics import mean_squared_error
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+print("Root Mead squared Error is:")
+print(rmse)
+
+
+#training accuracy
+
+print("Training accuracy is:")
+lr.score(X_train, y_train)
+
+#testing accuracy
+
+print("Testing accuracy is:")
+lr.score(X_test, y_test)

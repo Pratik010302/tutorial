@@ -1,0 +1,85 @@
+Ass6 . Gaussian Naive Bayes
+
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score, recall_score, f1_score, precision_score, classification_report, confusion_matrix, roc_auc_score, roc_curve
+
+
+
+df = pd.read_csv('iris.csv')
+df
+
+
+df.info()
+
+df.describe()
+
+
+df.isnull().sum()
+
+
+X = df[df.columns[0:3]]
+print(X)
+y = df[df.columns[4]]
+print(y)
+
+
+
+# Train_Test split
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.3,random_state=0)
+
+
+
+#Naive Bayes Modelling
+gaussian = GaussianNB()
+
+
+#Fitting the model
+gaussian.fit(X_train, y_train)
+
+
+# Model Prediction
+
+Y_pred = gaussian.predict(X_test) 
+accuracy_nb=round(accuracy_score(y_test,Y_pred)* 100, 2)
+acc_gaussian = round(gaussian.score(X_train, y_train) * 100, 2)
+
+print(accuracy_nb)
+print(acc_gaussian)
+
+
+#Confusion Matrix
+cm = confusion_matrix(y_test, Y_pred)
+print('Confusion matrix for Naive Bayes\n',cm)
+
+
+#Accuracy
+
+accuracy = accuracy_score(y_test,Y_pred)
+print('Accuracy: %.3f' %accuracy)
+
+
+
+#Precision
+
+precision =precision_score(y_test, Y_pred,average='micro')
+print('Precision: %.3f' %precision)
+
+
+# REcall
+recall =  recall_score(y_test, Y_pred,average='micro')
+print('Recall: %.3f' %recall)
+
+
+# F1 Score
+f1 = f1_score(y_test,Y_pred,average='micro')
+print('F1-score: %.3f' %f1)
+
+
+
+
+
